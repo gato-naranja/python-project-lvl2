@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "gato-naranja_generate_diff"
+version = "0.1.0"
+description = "Second project on Hexlet"
+authors = ["Alex Parshikov <alex.n.parshikov@gmail.com>"]
+packages = [
+  { include = "generate_diff" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^3.8.3"
+
+[tool.poetry.scripts]
+gendiff = "generate_diff.scripts.gendiff:main"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
