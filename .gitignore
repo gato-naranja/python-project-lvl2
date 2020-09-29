@@ -1,5 +1,7 @@
 .venv/
+.vscode/
 __pycache__
 *.egg-info
 *.pyc
 dist/
+*.json

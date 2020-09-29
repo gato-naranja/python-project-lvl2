@@ -1,4 +1,12 @@
 import argparse
+from generate_diff.generate_diff import gendiff
+
+
+def main():
+    gendiff(
+            args.first_file,
+            args.second_file,
+            )
 
 
 parser = argparse.ArgumentParser(description='Generate diff')
@@ -12,3 +20,5 @@ parser.add_argument(
         help='set format of output',
 )
 args = parser.parse_args()
+if __name__ == '__main__':
+    main()
