@@ -39,11 +39,6 @@ def get_diff(path_to_file1, path_to_file2):
         full_path2,
         splitext(full_path2)[1],
     )
-    print('=======================================')
-    print(first_data)
-    print('=======================================')
-    print(second_data)
-    print('=======================================')
     result = gendiff(
         first_data,
         second_data,
