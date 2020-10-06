@@ -1,4 +1,5 @@
 import json
+from os.path import abspath
 
 
 def gendiff(first_file, second_file):
@@ -19,8 +20,15 @@ def gendiff(first_file, second_file):
         else:
             result_diff['+ ' + key] = second_data[key]
     result_diff.update(first_data)
+    return result_diff
+
+
+def get_diff(path_1, path_2):
+    result = gendiff(
+        abspath(path_1),
+        abspath(path_2),
+        )
     print('{')
-    for key, value in result_diff.items():
+    for key, value in result.items():
         print(f'    {key}: {value}')
     print('}')
-    return

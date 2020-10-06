@@ -1,9 +1,9 @@
 import argparse
-from generate_diff.generate_diff import gendiff
+from generate_diff.generate_diff import get_diff
 
 
 def main():
-    gendiff(
+    get_diff(
             args.first_file,
             args.second_file,
             )
