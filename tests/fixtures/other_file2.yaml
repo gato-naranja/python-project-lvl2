@@ -1,3 +1,4 @@
-timeout: 20
+timeout: 50
 verbose: true
 host: hexlet.io
+type: education
