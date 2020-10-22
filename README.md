@@ -21,3 +21,29 @@ You can run package and to see parameters as:
 $env/bin/gendiff -h
 ```
 <a href="https://asciinema.org/a/IVIgvr1XV6ZPKA7kjPm8cfvbd" target="_blank"><img src="https://asciinema.org/a/IVIgvr1XV6ZPKA7kjPm8cfvbd.svg" /></a>
+
+## Run diff simple files
+
+For compare simple files YAML and JSON formats:
+```
+$env/bin/gendiff file1.json file2.json
+```
+or
+```
+$env/bin/gendiff file1.yaml file2.yaml
+```
+<a href="https://asciinema.org/a/ioqGdlcZRfLK1Hv1n8IblVa4p" target="_blank"><img src="https://asciinema.org/a/ioqGdlcZRfLK1Hv1n8IblVa4p.svg" /></a>
+
+## Run diff complex files
+For compare complex files YAML and JSON formats:
+```
+gendiff file1.json file2.json
+```
+<a href="https://asciinema.org/a/D5tm8dAesjXKO41VbPxjavtoz" target="_blank"><img src="https://asciinema.org/a/D5tm8dAesjXKO41VbPxjavtoz.svg" /></a>
+
+## Output diff in plain format
+For output diff results in plain format you can use '-f' or '--format' option with the value 'plain':
+```
+gendiff -f plain file1.json file2.json
+```
+<a href="https://asciinema.org/a/x2Al0RdAzK1vqOjqq8b6GlCjz" target="_blank"><img src="https://asciinema.org/a/x2Al0RdAzK1vqOjqq8b6GlCjz.svg" /></a>
