@@ -1,19 +1,19 @@
 def make_node(obligatory_value, ext_value='', mod=''):
     if mod == 'add':
         node = {
-            'diff': 'add',
+            'diff': 'added',
             'major': obligatory_value,
         }
     elif mod == 'remove':
         node = {
-            'diff': 'remove',
+            'diff': 'removed',
             'minor': obligatory_value,
         }
     elif mod == 'change':
         node = {
-            'diff': 'change',
-            'minor': obligatory_value,
-            'major': ext_value,
+            'diff': 'updated',
+            'from': obligatory_value,
+            'to': ext_value,
         }
     else:
         node = obligatory_value

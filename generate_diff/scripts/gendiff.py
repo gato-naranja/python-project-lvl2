@@ -6,6 +6,7 @@ def main():
     get_diff(
             args.first_file,
             args.second_file,
+            args.format,
             )
 
 
