@@ -13,6 +13,7 @@
 # }
 
 
+import json
 from generate_diff.src.diff_model import get_diff, get_mod, get_action
 
 
@@ -51,8 +52,9 @@ def make_diff_view(source_data):
     return result_view
 
 
-def construct_view_elem(key, value=None):
-    return f'{key}:' if value is None else f'{key}: {value}'
+def make_json_view(source_data):
+    diff = render_diff_to_dict(source_data)
+    return [json.dumps(diff)]
 
 
 def make_plain_view(source_data):
@@ -72,6 +74,10 @@ def make_plain_view(source_data):
     return result_view
 
 
+def construct_view_elem(key, value=None):
+    return f'{key}:' if value is None else f'{key}: {value}'
+
+
 def make_message(value, path):
     action = get_action(value['mod'])
     message = f'Property \'{path}\' was {action}'
@@ -85,8 +91,31 @@ def make_message(value, path):
     return message
 
 
+def render_diff_to_dict(data):
+    result_view = {}
+    for key, value in data.items():
+        diff = get_diff(value)
+        if diff is None:
+            result_view[key] = value
+        elif diff == 'next':
+            result_view[key] = render_diff_to_dict(value)
+        else:
+            mods = get_mod(value)
+            for mod in mods:
+                mod_key = SYMBOLS[mod] + key
+                if is_dict(value[mod]):
+                    result_view[mod_key] = render_diff_to_dict(value[mod])
+                else:
+                    result_view[mod_key] = value[mod]
+    return result_view
+
+
 def extract_content(value, quotes=''):
     if isinstance(value, dict):
         return '[complex value]'
     else:
         return f'{quotes}{value}{quotes}'
+
+
+def is_dict(value):
+    return isinstance(value, dict)
