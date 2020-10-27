@@ -47,3 +47,10 @@ For output diff results in plain format you can use '-f' or '--format' option wi
 gendiff -f plain file1.json file2.json
 ```
 <a href="https://asciinema.org/a/x2Al0RdAzK1vqOjqq8b6GlCjz" target="_blank"><img src="https://asciinema.org/a/x2Al0RdAzK1vqOjqq8b6GlCjz.svg" /></a>
+
+## Output diff in JSON format
+For output diff results in JSON format you can use '-f' or '--format' option with the value 'json':
+```
+gendiff -f json file1.json file2.json
+```
+<a href="https://asciinema.org/a/kUv1vxVwHK5TA2wxe9Re9qoWK" target="_blank"><img src="https://asciinema.org/a/kUv1vxVwHK5TA2wxe9Re9qoWK.svg" /></a>
