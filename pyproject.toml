@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gato-naranja_generate_diff"
-version = "0.1.7"
+version = "0.1.8"
 description = "Second project on Hexlet"
 authors = ["Alex Parshikov <alex.n.parshikov@gmail.com>"]
 packages = [

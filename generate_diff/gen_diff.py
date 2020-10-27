@@ -3,6 +3,7 @@ import yaml
 from os.path import abspath, splitext
 from generate_diff.src.comparison import make_comparison
 from generate_diff.src.views import make_diff_view, make_plain_view
+from generate_diff.src.views import make_json_view
 
 
 def get_diff(file1, file2, format=''):
@@ -37,7 +38,10 @@ def output_diffs(input_data, format):
         output_view = make_diff_view(input_data)
     elif format == 'plain':
         output_view = make_plain_view(input_data)
-    print_view(output_view)
+    elif format == 'json':
+        output_view = make_json_view(input_data)
+    if output_view is not None:
+        print_view(output_view)
 
 
 def print_view(maked_view):
