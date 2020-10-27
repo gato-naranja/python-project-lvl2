@@ -32,14 +32,14 @@ or
 ```
 $env/bin/gendiff file1.yaml file2.yaml
 ```
-<a href="https://asciinema.org/a/ioqGdlcZRfLK1Hv1n8IblVa4p" target="_blank"><img src="https://asciinema.org/a/ioqGdlcZRfLK1Hv1n8IblVa4p.svg" /></a>
+<a href="https://asciinema.org/a/DpuiMnQsHfvjt7txgAsgQMPpY" target="_blank"><img src="https://asciinema.org/a/DpuiMnQsHfvjt7txgAsgQMPpY.svg" /></a>
 
 ## Run diff complex files
 For compare complex files YAML and JSON formats:
 ```
 gendiff file1.json file2.json
 ```
-<a href="https://asciinema.org/a/D5tm8dAesjXKO41VbPxjavtoz" target="_blank"><img src="https://asciinema.org/a/D5tm8dAesjXKO41VbPxjavtoz.svg" /></a>
+<a href="https://asciinema.org/a/qzFytjjg5K7tHnq1wb1MFa99s" target="_blank"><img src="https://asciinema.org/a/qzFytjjg5K7tHnq1wb1MFa99s.svg" /></a>
 
 ## Output diff in plain format
 For output diff results in plain format you can use '-f' or '--format' option with the value 'plain':
