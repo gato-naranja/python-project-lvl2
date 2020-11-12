@@ -1,23 +1,14 @@
-import json
-
-
 def simple_diff_data():
     return {
         'timeout': {
-            'diff': 'update',
-            'mod': ['removed', 'added'],
             'removed': 50,
             'added': 20
             },
         'verbose': {
-            'diff': 'add',
-            'mod': ['added'],
             'added': True
             },
         'host': 'hexlet.io',
         'follow': {
-            'diff': 'remove',
-            'mod': ['removed'],
             'removed': False,
             }
         }
@@ -43,32 +34,22 @@ def complex_diff_data():
     return {
         'common': {
             'follow': {
-                'diff': 'add',
-                'mod': ['added'],
                 'added': False
             },
             'setting1': 'Value 1',
             'setting2': {
-                'diff': 'remove',
-                'mod': ['removed'],
                 'removed': 200
             },
             'setting3': {
-                'diff': 'update',
-                'mod': ['removed', 'added'],
                 'removed': True,
                 'added': {
                     'key': 'value'
                 }
             },
             'setting4': {
-                'diff': 'add',
-                'mod': ['added'],
                 'added': 'blah blah',
             },
             'setting5': {
-                'diff': 'add',
-                'mod': ['added'],
                 'added': {
                     'key5': 'value5'
                 }
@@ -76,31 +57,23 @@ def complex_diff_data():
             'setting6': {
                 'doge': {
                     'wow': {
-                        'diff': 'update',
-                        'mod': ['removed', 'added'],
                         'removed': 'too much',
                         'added': 'so much'
                         }
                     },
                 'key': 'value',
                 'ops': {
-                    'diff': 'add',
-                    'mod': ['added'],
                     'added': 'vops',
                     }
                 }
         },
         'group1': {
             'baz': {
-                'diff': 'update',
-                'mod': ['removed', 'added'],
                 'removed': 'bas',
                 'added': 'bars'
             },
             'foo': 'bar',
             'nest': {
-                'diff': 'update',
-                'mod': ['removed', 'added'],
                 'removed': {
                     'key': 'value'
                     },
@@ -108,8 +81,6 @@ def complex_diff_data():
             }
         },
         'group2': {
-            'diff': 'remove',
-            'mod': ['removed'],
             'removed': {
                 'abc': 12345,
                 'deep': {
@@ -118,8 +89,6 @@ def complex_diff_data():
                 }
             },
         'group3': {
-            'diff': 'add',
-            'mod': ['added'],
             'added': {
                 'fee': 100500,
                 'deep': {
@@ -215,90 +184,49 @@ def plain_data():
 
 
 def diff_view_structure():
-    return [
-        (0, '-', 'group2:'),
-        (1, ' ', 'abc: 12345'),
-        (1, ' ', 'deep:'),
-        (2, ' ', 'id: 45'),
-        (0, '+', 'group3:'),
-        (1, ' ', 'fee: 100500'),
-        (1, ' ', 'deep:'),
-        (2, ' ', 'id:'),
-        (3, ' ', 'number: 45'),
-        (0, ' ', 'common:'),
-        (1, ' ', 'setting6:'),
-        (2, ' ', 'doge:'),
-        (3, '-', 'wow: too much'),
-        (3, '+', 'wow: so much'),
-        (2, '+', 'ops: vops'),
-        (2, ' ', 'key: value'),
-        (1, '-', 'setting3: True'),
-        (1, '+', 'setting3:'),
-        (2, ' ', 'key: value'),
-        (1, '+', 'follow: False'),
-        (1, ' ', 'setting1: Value 1'),
-        (1, '+', 'setting4: blah blah'),
-        (1, '-', 'setting2: 200'),
-        (1, '+', 'setting5:'),
-        (2, ' ', 'key5: value5'),
-        (0, ' ', 'group1:'),
-        (1, '-', 'nest:'),
-        (2, ' ', 'key: value'),
-        (1, '+', 'nest: str'),
-        (1, '-', 'baz: bas'),
-        (1, '+', 'baz: bars'),
-        (1, ' ', 'foo: bar')
-        ]
-
-
-def complex_json_data():
-    return json.dumps({
-        'common': {
-            '+follow': False,
-            'setting1': 'Value 1',
-            '-setting2': 200,
-            '-setting3': True,
-            '+setting3': {
-                'key': 'value'
-                },
-            '+setting4': 'blah blah',
-            '+setting5': {
-                'key5': 'value5'
-                },
-            'setting6': {
-                'doge': {
-                    '-wow': 'too much',
-                    '+wow': 'so much'
-                    },
-                'key': 'value',
-                '+ops': 'vops'
-                }
-            },
-        'group1': {
-            '-baz': 'bas',
-            '+baz': 'bars',
-            'foo': 'bar',
-            '-nest': {
-                'key': 'value'
-                },
-            '+nest': 'str',
-            },
-        '-group2': {
-            'abc': 12345,
-            'deep': {
-                'id': 45
-                }
-            },
-        '+group3': {
-            'fee': 100500,
-            'deep': {
-                'id': {
-                    'number': 45
+    return {
+        '+ group3': {
+            ' fee': 100500,
+            ' deep': {
+                ' id': {
+                    ' number': 45
                     }
                 }
+            },
+        ' common': {
+            '+ setting5': {
+                ' key5': 'value5'
+                },
+            ' setting1': 'Value 1',
+            ' setting6': {
+                ' key': 'value',
+                ' doge': {
+                    '- wow': 'too much',
+                    '+ wow': 'so much'
+                    },
+                '+ ops': 'vops'
+                },
+            '+ setting4': 'blah blah',
+            '- setting2': 200,
+            '+ follow': False,
+            '- setting3': True,
+            '+ setting3': {
+                ' key': 'value'
+                }
+            },
+        '- group2': {
+            ' abc': 12345,
+            ' deep': {
+                ' id': 45
+                }
+            },
+        ' group1': {
+            '- nest': {
+                ' key': 'value'
+                },
+            '+ nest': 'str',
+            '- baz': 'bas',
+            '+ baz': 'bars',
+            ' foo': 'bar'
             }
-    }
-    )
-
-def simple_json_data():
-    return json.dumps({'-timeout': 50, '+timeout': 20, '+verbose': True, 'host': 'hexlet.io', '-follow': False})
+        }
