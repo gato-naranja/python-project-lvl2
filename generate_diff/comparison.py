@@ -1,25 +1,28 @@
-def make_comparison(source_data, modified_data):
+def compare(source_data, modified_data):
     return dict(
         map(
-            lambda x:
-            (x, get_value(source_data.get(x), modified_data.get(x))),
+            lambda x: (
+                x,
+                collect_diff_values(source_data.get(x), modified_data.get(x))
+                ),
             set(source_data.keys()) | set(modified_data.keys())
         )
     )
 
 
-def get_value(source_node, modified_node):
-    if source_node == modified_node:
-        return modified_node
-    elif modified_node is None:
-        return {'removed': source_node}
-    elif source_node is None:
-        return {'added': modified_node}
-    elif source_node != modified_node:
-        if isinstance(source_node, dict) and isinstance(modified_node, dict):
-            return make_comparison(source_node, modified_node)
+def collect_diff_values(source, modified):
+    if source == modified:
+        result = modified
+    elif modified is None:
+        result = {'removed': source}
+    elif source is None:
+        result = {'added': modified}
+    elif source != modified:
+        if isinstance(source, dict) and isinstance(modified, dict):
+            result = compare(source, modified)
         else:
-            return {
-                'removed': source_node,
-                'added': modified_node,
-            }
+            result = {
+                'removed': source,
+                'added': modified,
+                }
+    return result

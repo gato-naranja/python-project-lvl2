@@ -7,4 +7,3 @@ dist/
 .coverage
 coverage.xml
 makefile.tmp
-generate_diff/data_testing_files/

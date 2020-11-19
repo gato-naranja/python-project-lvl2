@@ -17,7 +17,7 @@ parser.add_argument(
         '-f',
         '--format',
         type=str,
-        default='',
+        default='stylish',
         help='set format of output',
 )
 args = parser.parse_args()

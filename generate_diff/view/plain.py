@@ -1,4 +1,4 @@
-def make_plain_view(diff):
+def render_(diff):
     result_view = []
 
     def search_modified_nodes(sub_data, path=''):
@@ -12,6 +12,11 @@ def make_plain_view(diff):
 
     search_modified_nodes(diff)
     return result_view
+
+
+def print_(rendered_diff):
+    for line in rendered_diff:
+        print(line)
 
 
 def is_modified(value):
