@@ -1,49 +1,40 @@
-def render_(diff):
-    result_view = []
+def render(diff):
+    out_data = []
 
-    def search_modified_nodes(sub_data, path=''):
-        for key, value in sub_data.items():
+    def search_modified_nodes(sub_tree, path=''):
+        for key, value in sub_tree.items():
             key_path = path + key
             if isinstance(value, dict):
-                if is_modified(value):
-                    result_view.append(make_message(value, key_path))
+                removed = value.get('removed')
+                added = value.get('added')
+                if removed is not None or added is not None:
+                    out_data.append(make_message(removed, added, key_path))
                 else:
                     search_modified_nodes(value, path=key_path + '.')
 
     search_modified_nodes(diff)
-    return result_view
+    return '\n'.join(out_data)
 
 
-def print_(rendered_diff):
-    for line in rendered_diff:
-        print(line)
-
-
-def is_modified(value):
-    return value.get('added') is not None or value.get('removed') is not None
-
-
-def make_message(value, path):
-    diff_status = get_status(value)
-    message = f'Property \'{path}\' was {diff_status}'
-    if diff_status == 'added':
-        added_value = extract_content(value['added'])
+def make_message(val_removed, val_added, path):
+    diff = get_status(val_removed, val_added)
+    message = f'Property \'{path}\' was {diff}'
+    if diff == 'added':
+        added_value = extract_content(val_added)
         message += f' with value: {added_value}'
-    elif diff_status == 'updated':
-        removed_value = extract_content(value['removed'], quotes='\'')
-        added_value = extract_content(value['added'], quotes='\'')
+    elif diff == 'updated':
+        removed_value = extract_content(val_removed, quotes='\'')
+        added_value = extract_content(val_added, quotes='\'')
         message += f' from {removed_value} to {added_value}'
     return message
 
 
-def get_status(value):
-    status_added = value.get('added')
-    status_removed = value.get('removed')
-    if status_added is not None and status_removed is None:
+def get_status(val_old, val_new):
+    if val_new is not None and val_old is None:
         return 'added'
-    elif status_removed is not None and status_added is None:
+    elif val_old is not None and val_new is None:
         return 'removed'
-    elif status_added is not None and status_removed is not None:
+    elif val_new is not None and val_old is not None:
         return 'updated'
 
 
@@ -51,4 +42,16 @@ def extract_content(value, quotes=''):
     if isinstance(value, dict):
         return '[complex value]'
     else:
-        return f'{quotes}{value}{quotes}'
+        return f'{quotes}{transmit(value)}{quotes}'
+
+
+def transmit(item):
+    if item is False:
+        transmitted = 'false'
+    elif item is True:
+        transmitted = 'true'
+    elif item is None:
+        transmitted = 'null'
+    else:
+        transmitted = item
+    return transmitted

@@ -1,26 +1,27 @@
 import json
 import yaml
+import argparse
 from os.path import abspath, splitext
-from generate_diff.view import stylish
-from generate_diff.view import plain
-from generate_diff.view import v_json
+
+
+def parse():
+    parser = argparse.ArgumentParser(description='Generate diff')
+    parser.add_argument('first_file', type=str)
+    parser.add_argument('second_file', type=str)
+    parser.add_argument(
+        '-f',
+        '--format',
+        type=str,
+        default='stylish',
+        help='set format of output',
+    )
+    return parser.parse_args()
 
 
 def load_(file_name):
     path_to_source = abspath(file_name)
     file_format = splitext(path_to_source)[1]
     return extract_data(path_to_source, file_format)
-
-
-def output_(diff, format):
-    if format == 'stylish':
-        handler = stylish
-    elif format == 'plain':
-        handler = plain
-    elif format == 'json':
-        handler = v_json
-    visualization = handler.render_(diff)
-    handler.print_(visualization)
 
 
 def extract_data(file_name, extention):

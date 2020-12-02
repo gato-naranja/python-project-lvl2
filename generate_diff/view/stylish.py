@@ -1,47 +1,46 @@
-SYMBOLS = {
-    'added': '+',
-    'removed': '-'
-}
+def render(diff):
+    out_data = ['{']
+
+    def walk(sub_tree, indent):
+        for key, value in sub_tree.items():
+            if isinstance(value, dict):
+                out_data.append(f'{indent}{key}: {{')
+                walk(value, indent + '    ')
+            else:
+                out_data.append(f'{indent}{key}: {transmit(value)}')
+        out_data.append(f'{indent}}}')
+
+    tree = transform(diff)
+    walk(tree, '')
+    return '\n'.join(out_data)
 
 
-def render_(source, sep=' '):
-    result_view = {}
-    for key, value in source.items():
-        if is_modified(value):
-            for mod in value.keys():
-                mod_key = SYMBOLS[mod] + sep + key
-                result_view[mod_key] = get_(value[mod], sep)
-        else:
-            indent = convert(sep)
-            result_view[indent + key] = get_(value, sep)
-    return result_view
-
-
-def print_(rendered_diff, indent=''):
-    for key, value in rendered_diff.items():
+def transform(inner_tree):
+    result = {}
+    for key, value in inner_tree.items():
         if isinstance(value, dict):
-            print(f'{indent}{key}:')
-            print_(value, indent + '    ')
+            added = value.get('added')
+            removed = value.get('removed')
+            if removed is not None:
+                mod_key = '-' + ' ' + key
+                result[mod_key] = removed
+            if added is not None:
+                mod_key = '+' + ' ' + key
+                result[mod_key] = added
+            if added is None and removed is None:
+                result['  ' + key] = transform(value)
         else:
-            print(f'{indent}{key}: {value}')
+            result['  ' + key] = value
+    return result
 
 
-def is_modified(value):
-    if isinstance(value, dict):
-        added_mod = value.get('added')
-        removed_mod = value.get('removed')
-        return added_mod is not None or removed_mod is not None
-
-
-def get_(value, sep):
-    if isinstance(value, dict):
-        return render_(value, sep)
+def transmit(value):
+    if value is False:
+        transmitted = 'false'
+    elif value is True:
+        transmitted = 'true'
+    elif value is None:
+        transmitted = 'null'
     else:
-        return value
-
-
-def convert(symbol):
-    if symbol == '':
-        return ''
-    else:
-        return symbol + ' '
+        transmitted = value
+    return transmitted

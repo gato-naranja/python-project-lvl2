@@ -1,0 +1,7 @@
+{
++ verbose: true
+- timeout: 50
++ timeout: 20
+  host: hexlet.io
+- follow: false
+}
