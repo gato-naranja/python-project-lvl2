@@ -1,23 +1,25 @@
 def render(diff):
-    out_data = []
+    view_lines = []
 
     def search_modified_nodes(sub_tree, path=''):
-        for key, value in sub_tree.items():
+        filtred_tree = dict(
+            (k, v) for k, v in sub_tree.items() if isinstance(v, dict)
+        )
+        for key, value in filtred_tree.items():
             key_path = path + key
-            if isinstance(value, dict):
-                removed = value.get('removed')
-                added = value.get('added')
-                if removed is not None or added is not None:
-                    out_data.append(make_message(removed, added, key_path))
-                else:
-                    search_modified_nodes(value, path=key_path + '.')
+            removed = value.get('removed')
+            added = value.get('added')
+            if removed is not None or added is not None:
+                view_lines.append(make_message(removed, added, key_path))
+            else:
+                search_modified_nodes(value, path=key_path + '.')
 
     search_modified_nodes(diff)
-    return '\n'.join(out_data)
+    return '\n'.join(view_lines)
 
 
 def make_message(val_removed, val_added, path):
-    diff = get_status(val_removed, val_added)
+    diff = get_type_mod(val_removed, val_added)
     message = f'Property \'{path}\' was {diff}'
     if diff == 'added':
         added_value = extract_content(val_added)
@@ -29,7 +31,7 @@ def make_message(val_removed, val_added, path):
     return message
 
 
-def get_status(val_old, val_new):
+def get_type_mod(val_old, val_new):
     if val_new is not None and val_old is None:
         return 'added'
     elif val_old is not None and val_new is None:

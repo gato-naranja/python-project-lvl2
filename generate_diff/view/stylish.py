@@ -1,18 +1,17 @@
 def render(diff):
-    out_data = ['{']
+    view_lines = ['{']
 
     def walk(sub_tree, indent):
         for key, value in sub_tree.items():
             if isinstance(value, dict):
-                out_data.append(f'{indent}{key}: {{')
+                view_lines.append(f'{indent}{key}: {{')
                 walk(value, indent + '    ')
             else:
-                out_data.append(f'{indent}{key}: {transmit(value)}')
-        out_data.append(f'{indent}}}')
+                view_lines.append(f'{indent}{key}: {transmit(value)}')
+        view_lines.append(f'{indent}}}')
 
-    tree = transform(diff)
-    walk(tree, '')
-    return '\n'.join(out_data)
+    walk(transform(diff), '')
+    return '\n'.join(view_lines)
 
 
 def transform(inner_tree):

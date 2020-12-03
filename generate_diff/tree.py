@@ -5,7 +5,7 @@ def compare(source_data, modified_data):
                 x,
                 collect_diff_values(source_data.get(x), modified_data.get(x))
                 ),
-            set(source_data.keys()) | set(modified_data.keys())
+            sorted(set(source_data.keys()) | set(modified_data.keys()))
         )
     )
 

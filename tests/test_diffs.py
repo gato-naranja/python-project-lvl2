@@ -23,13 +23,13 @@ def test_simple_diff():
         modified = json.load(modified_file)
     with open('tests/fixtures/simple_stylish_view.txt', 'r') as view_file:
         expected = view_file.read()
-    comparison_result = stylish.render(
+    got_result = stylish.render(
         tree.compare(
             source,
             modified
         )
     )
-    assert comparison_result == expected
+    assert got_result == expected
 
 
 def test_complex_diffs(params_test):
@@ -42,11 +42,11 @@ def test_complex_diffs(params_test):
         if splitext(reference_source)[1] == '.txt':
             expected = diff_file.read()
         else:
-            expected = json.load(diff_file)
-    comparison_result = output_format.render(
+            expected = json.dumps(json.load(diff_file), indent=4)
+    got_result = output_format.render(
         tree.compare(
             source,
             modified
         )
     )
-    assert comparison_result == expected
+    assert got_result == expected
