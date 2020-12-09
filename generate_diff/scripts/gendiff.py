@@ -1,5 +1,5 @@
 from generate_diff.generate_diff import get_diff
-from generate_diff.cli import parse
+from generate_diff.cli import take_apart_params
 
 
 def main():
@@ -12,6 +12,6 @@ def main():
     )
 
 
-args = parse()
+args = take_apart_params()
 if __name__ == '__main__':
     main()
