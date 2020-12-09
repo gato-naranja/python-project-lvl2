@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "gato-naranja_generate_diff"
+name = "hexlet-code"
 version = "0.1.2"
 description = "Second project on Hexlet"
 authors = ["Alex Parshikov <alex.n.parshikov@gmail.com>"]
