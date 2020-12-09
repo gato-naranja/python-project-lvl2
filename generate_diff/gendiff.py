@@ -3,7 +3,7 @@ from generate_diff import tree
 from generate_diff.view.selector import choice
 
 
-def get_diff(source_file, modified_file, format):
+def generate_diff(source_file, modified_file, format):
     handler = choice(format)
     return handler.render(
         tree.compare(
