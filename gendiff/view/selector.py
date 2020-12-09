@@ -1,6 +1,6 @@
-from generate_diff.view import stylish
-from generate_diff.view import plain
-from generate_diff.view import json
+from gendiff.view import stylish
+from gendiff.view import plain
+from gendiff.view import json
 
 
 def choice(format):

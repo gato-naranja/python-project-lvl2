@@ -1,10 +1,10 @@
 import json
 import pytest
 from os.path import splitext
-from generate_diff.view import stylish
-from generate_diff.view import plain
-from generate_diff.view import json as view_json
-from generate_diff import tree
+from gendiff.view import stylish
+from gendiff.view import plain
+from gendiff.view import json as view_json
+from gendiff import tree
 
 
 @pytest.fixture(params=[

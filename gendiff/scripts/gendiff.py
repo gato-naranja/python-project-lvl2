@@ -1,10 +1,10 @@
-from generate_diff.gendiff import generate_diff
-from generate_diff.cli import take_apart_params
+from gendiff.generate_diff import gendiff
+from gendiff.cli import take_apart_params
 
 
 def main():
     print(
-        generate_diff(
+        gendiff(
             args.first_file,
             args.second_file,
             args.format,
