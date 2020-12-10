@@ -3,12 +3,14 @@ def render(diff):
 
     def walk(sub_tree, indent):
         for key, value in sub_tree.items():
+            if key[0] not in ('+', '-'):
+                key = '  ' + key
             if isinstance(value, dict):
                 view_lines.append(f'{indent}{key}: {{')
                 walk(value, indent + '    ')
             else:
                 view_lines.append(f'{indent}{key}: {transmit(value)}')
-        view_lines.append(f'{indent}}}')
+        view_lines.append(f'{indent[:-2]}}}')
 
     walk(transform(diff), '  ')
     return '\n'.join(view_lines)
@@ -27,9 +29,9 @@ def transform(inner_tree):
                 mod_key = '+' + ' ' + key
                 result[mod_key] = added
             if added is None and removed is None:
-                result['  ' + key] = transform(value)
+                result[key] = transform(value)
         else:
-            result['  ' + key] = value
+            result[key] = value
     return result
 
 
