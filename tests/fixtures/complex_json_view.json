@@ -1,14 +1,14 @@
 {
     "common": {
         "follow": {
-            "added": false
+            "added": "false"
         },
         "setting1": "Value 1",
         "setting2": {
             "removed": 200
         },
         "setting3": {
-            "removed": true,
+            "removed": "true",
             "added": {
                 "key": "value"
             }

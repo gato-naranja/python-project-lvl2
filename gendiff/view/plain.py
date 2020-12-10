@@ -44,16 +44,4 @@ def extract_content(value, quotes=''):
     if isinstance(value, dict):
         return '[complex value]'
     else:
-        return f'{quotes}{transmit(value)}{quotes}'
-
-
-def transmit(item):
-    if item is False:
-        transmitted = 'false'
-    elif item is True:
-        transmitted = 'true'
-    elif item is None:
-        transmitted = 'null'
-    else:
-        transmitted = item
-    return transmitted
+        return f'{quotes}{value}{quotes}'

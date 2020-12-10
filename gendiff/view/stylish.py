@@ -9,7 +9,7 @@ def render(diff):
                 view_lines.append(f'{indent}{key}: {{')
                 walk(value, indent + '    ')
             else:
-                view_lines.append(f'{indent}{key}: {transmit(value)}')
+                view_lines.append(f'{indent}{key}: {value}')
         view_lines.append(f'{indent[:-2]}}}')
 
     walk(transform(diff), '  ')
@@ -33,15 +33,3 @@ def transform(inner_tree):
         else:
             result[key] = value
     return result
-
-
-def transmit(value):
-    if value is False:
-        transmitted = 'false'
-    elif value is True:
-        transmitted = 'true'
-    elif value is None:
-        transmitted = 'null'
-    else:
-        transmitted = value
-    return transmitted
