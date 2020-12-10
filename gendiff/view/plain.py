@@ -25,9 +25,9 @@ def make_message(val_removed, val_added, path):
         added_value = extract_content(val_added)
         message += f' with value: {added_value}'
     elif diff == 'updated':
-        removed_value = extract_content(val_removed, quotes='\'')
-        added_value = extract_content(val_added, quotes='\'')
-        message += f' from {removed_value} to {added_value}'
+        removed_value = extract_content(val_removed)
+        added_value = extract_content(val_added)
+        message += f'. From {removed_value} to {added_value}'
     return message
 
 
@@ -40,8 +40,12 @@ def get_type_mod(val_old, val_new):
         return 'updated'
 
 
-def extract_content(value, quotes=''):
+def extract_content(value):
     if isinstance(value, dict):
         return '[complex value]'
+    elif value in ('true', 'false', 'null'):
+        return f'{value}'
+    elif isinstance(value, (int, float)):
+        return f'{value}'
     else:
-        return f'{quotes}{value}{quotes}'
+        return f'\'{value}\''
