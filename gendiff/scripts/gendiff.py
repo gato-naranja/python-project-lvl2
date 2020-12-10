@@ -8,7 +8,7 @@ def main():
             args.first_file,
             args.second_file,
             args.format,
-            )
+        )
     )
 
 

@@ -6,8 +6,8 @@ def compare(source_data, modified_data):
                 collect_diff_values(
                     source_data.get(x, '#no#'),
                     modified_data.get(x, '#no#')
-                    )
-                ),
+                )
+            ),
             sorted(set(source_data.keys()) | set(modified_data.keys()))
         )
     )
@@ -29,7 +29,7 @@ def collect_diff_values(source, modified):
             result = {
                 'removed': source,
                 'added': modified,
-                }
+            }
     return result
 
 
