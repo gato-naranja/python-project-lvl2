@@ -10,7 +10,7 @@ def render(diff):
                 view_lines.append(f'{indent}{key}: {transmit(value)}')
         view_lines.append(f'{indent}}}')
 
-    walk(transform(diff), '')
+    walk(transform(diff), '  ')
     return '\n'.join(view_lines)
 
 
