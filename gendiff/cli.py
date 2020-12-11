@@ -21,13 +21,14 @@ def take_apart_params():
 def load_(file_name):
     path_to_source = abspath(file_name)
     file_format = splitext(path_to_source)[1]
-    return extract_data(path_to_source, file_format)
+    with open(path_to_source, 'r') as file_source:
+        loaded_data = file_source.read()
+    return parse(loaded_data, file_format)
 
 
-def extract_data(file_name, extention):
-    with open(file_name, 'r') as file_load:
-        if extention == '.json':
-            loaded_data = json.load(file_load)
-        elif extention == '.yaml' or extention == '.yml':
-            loaded_data = yaml.load(file_load, yaml.SafeLoader)
-    return loaded_data
+def parse(data, _format):
+    if _format == 'json':
+        parsed = json.load(data)
+    elif _format in ('yaml', 'yml'):
+        parsed = yaml.load(data, yaml.SafeLoader)
+    return parsed
