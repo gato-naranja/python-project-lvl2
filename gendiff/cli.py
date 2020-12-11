@@ -30,5 +30,5 @@ def parse(data, _format):
     if _format == '.json':
         parsed = json.loads(data)
     elif _format in ('.yaml', '.yml'):
-        parsed = yaml.loads(data, yaml.SafeLoader)
+        parsed = yaml.load(data)
     return parsed
