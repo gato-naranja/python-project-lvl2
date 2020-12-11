@@ -27,8 +27,8 @@ def load_(file_name):
 
 
 def parse(data, _format):
-    if _format == 'json':
-        parsed = json.load(data)
-    elif _format in ('yaml', 'yml'):
-        parsed = yaml.load(data, yaml.SafeLoader)
+    if _format == '.json':
+        parsed = json.loads(data)
+    elif _format in ('.yaml', '.yml'):
+        parsed = yaml.loads(data, yaml.SafeLoader)
     return parsed
