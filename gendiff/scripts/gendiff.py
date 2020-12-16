@@ -3,6 +3,7 @@ from gendiff.cli import take_apart_params
 
 
 def main():
+    args = take_apart_params()
     print(
         generate_diff(
             args.first_file,
@@ -12,6 +13,5 @@ def main():
     )
 
 
-args = take_apart_params()
 if __name__ == '__main__':
     main()

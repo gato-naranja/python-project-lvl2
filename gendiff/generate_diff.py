@@ -1,4 +1,4 @@
-from gendiff.cli import load_
+from gendiff.io import load_
 from gendiff import tree
 from gendiff.view.selector import choice
 
